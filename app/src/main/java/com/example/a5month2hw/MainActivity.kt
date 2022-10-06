@@ -7,16 +7,14 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.a5month2hw.databinding.ActivityMainBinding
 import com.example.a5month2hw.model.LoveModel
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

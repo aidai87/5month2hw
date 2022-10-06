@@ -9,7 +9,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.a5month2hw.R
 import com.example.a5month2hw.databinding.FragmentResultBinding
 import com.example.a5month2hw.model.LoveModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ResultFragment : Fragment() {
 
     private lateinit var binding: FragmentResultBinding
