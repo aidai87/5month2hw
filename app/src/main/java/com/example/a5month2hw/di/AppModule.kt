@@ -1,5 +1,6 @@
 package com.example.a5month2hw.di
 
+import com.example.a5month2hw.Prefs
 import com.example.a5month2hw.model.LoveApi
 import dagger.Module
 import dagger.Provides
@@ -17,5 +18,8 @@ class AppModule {
         return Retrofit.Builder().baseUrl("https://love-calculator.p.rapidapi.com/")
             .addConverterFactory(GsonConverterFactory.create()).build().create(LoveApi::class.java)
     }
-
+    @Provides
+    fun providePrefs(): Prefs {
+        return Prefs()
+    }
 }

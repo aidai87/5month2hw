@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.a5month2hw.App
 import com.example.a5month2hw.LoveViewModel
+import com.example.a5month2hw.Prefs
 import com.example.a5month2hw.R
 import com.example.a5month2hw.databinding.FragmentHomeBinding
 import com.example.a5month2hw.model.LoveModel
@@ -19,15 +20,19 @@ import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
     private val viewModel: LoveViewModel by viewModels()
 
+    @Inject
+    lateinit var prefs:Prefs
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        onBoard()
     }
 
     override fun onCreateView(
@@ -48,8 +53,7 @@ class HomeFragment : Fragment() {
             btnCalculate.setOnClickListener {
                 val firstName = etBoy.text.toString()
                 val secondName = etGirl.text.toString()
-                viewModel.getLiveModel(firstName, secondName).observe(
-                    viewLifecycleOwner
+                viewModel.getLiveModel(firstName,secondName).observe(viewLifecycleOwner
                 ) { loveModel ->
                     Log.e("ololo", "initClickers: $loveModel")
                     App.db.historyDao().insert(loveModel)
@@ -63,6 +67,12 @@ class HomeFragment : Fragment() {
             btnHistory.setOnClickListener {
                 findNavController().navigate(R.id.historyFragment)
             }
+        }
+    }
+
+    private fun onBoard() {
+        if (!prefs.isShown(requireContext())) {
+            findNavController().navigate(R.id.boardFragment)
         }
     }
 }
